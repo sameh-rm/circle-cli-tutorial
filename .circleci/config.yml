@@ -36,10 +36,10 @@ jobs:
           name: "write an ouput.txt file with Hello World as content"
           command: |
             echo "Hello World" > output.txt.
-    persist_to_workspace:
-      root: /tmp/workspace
-      path:
-        - ./output.txt
+    - persist_to_workspace:
+        root: /tmp/workspace
+        path:
+          - ./output.txt
 
   print_output_file:
     docker:
@@ -51,8 +51,8 @@ jobs:
           command: |
             cat output.txt
 
-    attach_workspace:
-      at: /tmp/workspace
+      - attach_workspace:
+          at: /tmp/workspace
 
 # Orchestrate or schedule a set of jobs
 workflows:
