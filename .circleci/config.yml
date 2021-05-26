@@ -33,9 +33,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "write an ouput.txt file with Hello World as content"
-        command: |
-          echo "Hello World" > output.txt.
+          name: "write an ouput.txt file with Hello World as content"
+          command: |
+            echo "Hello World" > output.txt.
     persist_to_workspace:
       root: /tmp/workspace
       path:
@@ -47,9 +47,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "runing the output filed persisted by the previous job"
-        command: |
-          cat output.txt
+          name: "runing the output filed persisted by the previous job"
+          command: |
+            cat output.txt
 
     attach_workspace:
       at: /tmp/workspace
