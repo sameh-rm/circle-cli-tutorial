@@ -51,7 +51,7 @@ jobs:
       - run:
           name: "runing the output filed persisted by the previous job"
           command: |
-            cat output.txt
+            cat ~/output.txt
 
 # Orchestrate or schedule a set of jobs
 workflows:
