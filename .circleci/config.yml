@@ -47,7 +47,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/
       - run:
           name: "runing the output filed persisted by the previous job"
           command: |
