@@ -37,7 +37,7 @@ jobs:
           command: |
             echo "Hello World" > output.txt.
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ~/
           paths:
             - ./output.txt
 
@@ -46,13 +46,12 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: "runing the output filed persisted by the previous job"
           command: |
             cat output.txt
-
-      - attach_workspace:
-          at: /tmp/workspace
 
 # Orchestrate or schedule a set of jobs
 workflows:
