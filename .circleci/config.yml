@@ -6,24 +6,53 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  print_hello:
+  # print_hello:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - checkout # this pulls code down from GitHub
+  #     - run: echo "Hello"
+  # print_world:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run: echo "World"
+  # print_author_name:
+  #   docker:
+  #     - image: cimg/base:2020.01
+  #   steps:
+  #     - checkout
+  #     - run:
+  #       name: "Printing out the author name from environment variables"
+  #       command: |
+  #         echo $author_name
+  save_hello_world_output:
     docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout # this pulls code down from GitHub
-      - run: echo "Hello"
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:2020.01
     steps:
       - checkout
-      - run: echo "World"
-  print_author_name:
+      - run:
+        name: "write an ouput.txt file with Hello World as content"
+        command: |
+          echo "Hello World" > output.txt.
+    persist_to_workspace:
+      root: /tmp/workspace
+      path:
+        - ./output.txt
+
+  print_output_file:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:2020.01
     steps:
       - checkout
-      - run: echo $author_name
+      - run:
+        name: "runing the output filed persisted by the previous job"
+        command: |
+          cat output.txt
+
+    attach_workspace:
+      at: /tmp/workspace
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -32,8 +61,8 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
-      - print_hello
-      - print_world:
-          requires:
-            - print_hello
-      - print_author_name
+      # - print_hello
+      # - print_world:
+      #     requires:
+      #       - print_hello
+      # - print_author_name
