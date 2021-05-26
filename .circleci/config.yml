@@ -38,7 +38,7 @@ jobs:
             echo "Hello World" > output.txt.
       - persist_to_workspace:
           root: /tmp/workspace
-          path:
+          paths:
             - ./output.txt
 
   print_output_file:
