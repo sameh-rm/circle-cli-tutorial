@@ -29,9 +29,8 @@ jobs:
   #         echo $author_name
   save_hello_world_output:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
-      - checkout
       - run:
           name: "write an ouput.txt file with Hello World as content"
           command: |
@@ -43,9 +42,8 @@ jobs:
 
   print_output_file:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
-      - checkout
       - attach_workspace:
           at: ~/
       - run:
