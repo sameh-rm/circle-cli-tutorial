@@ -23,7 +23,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo author_name
+      - run: echo $author_name
 
 # Orchestrate or schedule a set of jobs
 workflows:
