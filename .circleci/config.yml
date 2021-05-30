@@ -5,23 +5,20 @@ defaultImage: &defaultImage
   docker:
     - image: circleci/node:13.8.0
 commands:
-  createOutPutFile:
+  create_output_file:
     description: ""
     parameters:
       text:
         type: string
         default: "Hello World"
-
     steps:
-      - run:
-          echo << parameters.text >> > ~/output.txt
+      - run: echo << parameters.text >> > ~/output.txt
 jobs:
   save_hello_world_output:
     # Docker Image
     <<: *defaultImage
     steps:
-      - checkout
-      - createOutPutFile:
+      - create_output_file:
           text: "Sameh"
       - persist_to_workspace:
           root: ~/
