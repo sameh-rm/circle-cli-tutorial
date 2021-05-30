@@ -13,7 +13,8 @@ commands:
         default: "Hello World"
 
     steps:
-      run: echo << parameters.text >> > ~/output.txt
+      run:
+        - echo << parameters.text >> > ~/output.txt
 jobs:
   save_hello_world_output:
     # Docker Image
@@ -24,8 +25,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - output.txt:
-                text: "Sameh"
+            - output.txt
 
   print_output_file:
     # Docker Image
@@ -41,4 +41,5 @@ workflows:
       - save_hello_world_output
       - print_output_file:
           requires:
-            - save_hello_world_output
+            - save_hello_world_output:
+                text: "Sameh"
