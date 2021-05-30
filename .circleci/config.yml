@@ -24,7 +24,8 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - output.txt
+            - output.txt:
+                text: "Sameh"
 
   print_output_file:
     # Docker Image
